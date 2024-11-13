@@ -1,5 +1,6 @@
 import sys 
 import os
+import requests
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
@@ -9,13 +10,11 @@ import csv
 import logging
 import string
 import time
-import timeit
 
 from requests.exceptions import HTTPError
-from src.FilesGitHub import FilesGitHub 
-from src.RML import *
-from src.RMLtoShacl import RMLtoSHACL
-from src.SHACL import *
+from FilesGitHub import FilesGitHub
+from src.rml2shacl.RMLtoShacl import RMLtoSHACL
+from src.rml2shacl.SHACL import *
 
 def parseGithubFile(self, number, letter, typeInputFile):
     fileReadObj = FilesGitHub()
@@ -69,8 +68,9 @@ def main(RtoS):
             else:
                 skip_case_dict[row["number"]] = {row["letter"]}
 
+    shacl2shacl = requests.get("https://www.w3.org/ns/shacl-shacl").content
     validation_shape_graph = rdflib.Graph()
-    validation_shape_graph.parse("shacl-shacl.ttl", format="turtle")
+    validation_shape_graph.parse(shacl2shacl, format="turtle")
 
 
 

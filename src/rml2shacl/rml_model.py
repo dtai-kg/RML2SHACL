@@ -1,9 +1,7 @@
-from abc import ABC, abstractmethod, abstractstaticmethod
+from abc import ABC
 from typing import List, Dict, Any
 from pprint import pprint
-from json import dumps
 from dataclasses import dataclass
-from enum import Enum, auto
 
 from rdflib.term import Identifier, URIRef, BNode, Literal
 

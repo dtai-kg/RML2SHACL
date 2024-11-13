@@ -2,3 +2,5 @@ __pycache__
 .vim/*
 .idea/*
 .venv/*
+dist/*
+poetry.lock
