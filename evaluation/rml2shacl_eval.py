@@ -1,5 +1,6 @@
 import sys 
 import os
+import requests
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
@@ -67,8 +68,9 @@ def main(RtoS):
             else:
                 skip_case_dict[row["number"]] = {row["letter"]}
 
+    shacl2shacl = requests.get("https://www.w3.org/ns/shacl-shacl").content
     validation_shape_graph = rdflib.Graph()
-    validation_shape_graph.parse("shacl-shacl.ttl", format="turtle")
+    validation_shape_graph.parse(shacl2shacl, format="turtle")
 
 
 

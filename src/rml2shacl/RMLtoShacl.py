@@ -1,5 +1,6 @@
 import logging
 import os
+import requests
 from pathlib import Path
 from typing import Any, List
 
@@ -227,8 +228,11 @@ class RMLtoSHACL:
         outputfile_name = f"{filename_without_ext}-shape.ttl"
         self.writeShapeToFile(outputfile_name,shape_dir)
 
+
+
+        shacl2shacl = requests.get("https://www.w3.org/ns/shacl-shacl").content
         validation_shape_graph = rdflib.Graph()
-        validation_shape_graph.parse("shacl-shacl.ttl", format="turtle")
+        validation_shape_graph.parse(data=shacl2shacl, format="turtle")
 
         self.SHACL.Validation(validation_shape_graph, self.SHACL.graph)
 
