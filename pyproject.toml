@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "rml2shacl"
-version = "0.1.0"
+version = "1.0.0"
 description = "Translates RML into SHACL"
 authors = ["Thomas Delva <Thomas.Delva@UGent.be>"]
 readme = "README.md"
