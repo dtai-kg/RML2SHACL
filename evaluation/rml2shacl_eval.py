@@ -11,7 +11,7 @@ import string
 import time
 
 from requests.exceptions import HTTPError
-from src.FilesGitHub import FilesGitHub
+from FilesGitHub import FilesGitHub
 from src.rml2shacl.RMLtoShacl import RMLtoSHACL
 from src.rml2shacl.SHACL import *
 
