@@ -1,16 +1,7 @@
-import argparse
-import csv
 import logging
 import os
 from pathlib import Path
-import string
-import time
-import timeit
 from typing import Any, List
-
-import rdflib
-from rdflib import RDF
-from requests.exceptions import HTTPError
 
 from .RML import *
 from .SHACL import *
@@ -223,7 +214,7 @@ class RMLtoSHACL:
 
         return filenNameShape
 
-    def evaluate_file(self, rml_mapping_file):
+    def evaluate_file(self, rml_mapping_file,shape_dir=""):
         self.RML.parseFile(rml_mapping_file)
 
         for _, triples_map in self.RML.tm_model_dict.items():
@@ -232,8 +223,9 @@ class RMLtoSHACL:
             for pom in triples_map.poms:
                 self.transformPOM(subject_shape_node, pom, self.SHACL.graph)
 
-        outputfileName = f"{rml_mapping_file}-output-shape.ttl"
-        self.writeShapeToFile(outputfileName)
+        filename_without_ext = os.path.splitext(os.path.basename(rml_mapping_file))[0]
+        outputfile_name = f"{filename_without_ext}-shape.ttl"
+        self.writeShapeToFile(outputfile_name,shape_dir)
 
         validation_shape_graph = rdflib.Graph()
         validation_shape_graph.parse("shacl-shacl.ttl", format="turtle")

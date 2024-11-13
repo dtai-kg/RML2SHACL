@@ -9,13 +9,11 @@ import csv
 import logging
 import string
 import time
-import timeit
 
 from requests.exceptions import HTTPError
-from src.FilesGitHub import FilesGitHub 
-from src.RML import *
-from src.RMLtoShacl import RMLtoSHACL
-from src.SHACL import *
+from src.FilesGitHub import FilesGitHub
+from src.rml2shacl.RMLtoShacl import RMLtoSHACL
+from src.rml2shacl.SHACL import *
 
 def parseGithubFile(self, number, letter, typeInputFile):
     fileReadObj = FilesGitHub()
